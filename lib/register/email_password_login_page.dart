@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'phone_number_page.dart'; // Import halaman baru
 
 class EmailPasswordLoginPage extends StatefulWidget {
+  const EmailPasswordLoginPage({super.key});
+
   @override
   _EmailPasswordLoginPageState createState() => _EmailPasswordLoginPageState();
 }

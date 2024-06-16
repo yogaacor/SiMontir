@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:simontir/email_password_login_page.dart';
+import 'package:simontir/register/email_password_login_page.dart';
 import 'input_data.dart'; // Import halaman InputDataPage
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

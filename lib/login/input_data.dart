@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // Import halaman login
 
-class PersonalInfoPage extends StatefulWidget {
+class InputDataPage extends StatefulWidget {
+  const InputDataPage({super.key});
+
   @override
-  _PersonalInfoPageState createState() => _PersonalInfoPageState();
+  _InputDataPageState createState() => _InputDataPageState();
 }
 
-class _PersonalInfoPageState extends State<PersonalInfoPage> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
-  final _formKey =
-      GlobalKey<FormState>(); // Buat global key untuk validasi form
+class _InputDataPageState extends State<InputDataPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +21,24 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
-          key: _formKey, // Gunakan global key di sini
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Masukkan Nama dan Data Diri',
+                'Masukkan Email dan Password',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               Text(
-                'Silakan masukkan nama dan alamat lengkap Anda.',
+                'Silakan masukkan email dan password Anda.',
                 style: TextStyle(color: Colors.grey),
               ),
               SizedBox(height: 20),
               TextFormField(
-                controller: nameController,
+                controller: emailController,
                 decoration: InputDecoration(
-                  labelText: 'Nama',
+                  labelText: 'Email',
                   labelStyle: TextStyle(color: Colors.grey),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.lightBlue),
@@ -49,16 +49,18 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Nama tidak boleh kosong';
+                    return 'Email tidak boleh kosong';
+                  } else if (!isValidEmail(value)) {
+                    return 'Email tidak valid';
                   }
                   return null;
                 },
               ),
               SizedBox(height: 20),
               TextFormField(
-                controller: addressController,
+                controller: passwordController,
                 decoration: InputDecoration(
-                  labelText: 'Alamat',
+                  labelText: 'Password',
                   labelStyle: TextStyle(color: Colors.grey),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.lightBlue),
@@ -67,9 +69,10 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                     borderSide: BorderSide(color: Colors.grey),
                   ),
                 ),
+                obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Alamat tidak boleh kosong';
+                    return 'Password tidak boleh kosong';
                   }
                   return null;
                 },
@@ -78,26 +81,19 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Validasi formulir sebelum melanjutkan
-                    if (_formKey.currentState!.validate()) {
-                      String name = nameController.text.trim();
-                      String address = addressController.text.trim();
-
-                      if (_isValidName(name) && _isValidAddress(address)) {
-                        // Navigasi ke LoginPage jika valid
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                        );
-                      }
-                    }
+                    // if (_formKey.currentState!.validate()) {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(builder: (context) => ProfilePage()),
+                    //   );
+                    // }
                   },
                   child: Text(
                     'Lanjut',
-                    style: TextStyle(color: Colors.white), // Warna teks putih
+                    style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlue, // Warna tombol biru muda
+                    backgroundColor: Colors.lightBlue,
                     padding:
                         EdgeInsets.symmetric(horizontal: 135, vertical: 15),
                   ),
@@ -110,11 +106,8 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     );
   }
 
-  bool _isValidName(String name) {
-    return name.isNotEmpty;
-  }
-
-  bool _isValidAddress(String address) {
-    return address.isNotEmpty;
+  // Fungsi untuk memeriksa validitas email
+  bool isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
   }
 }
