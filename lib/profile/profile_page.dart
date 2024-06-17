@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'edit_profile_page.dart';
+import 'package:simontir/profile/edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -134,10 +134,10 @@ class _ProfilePageState extends State<ProfilePage> {
               icon: Icon(Icons.edit, color: Colors.white),
               iconSize: 16, // Perkecil ukuran ikon
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => EditProfilePage()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                );
               },
             ),
           ),
