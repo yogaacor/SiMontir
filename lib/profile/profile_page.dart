@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simontir/profile/edit_profile_page.dart';
+import 'order_history_page.dart'; // Make sure to import the OrderHistoryPage
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -164,7 +165,12 @@ class _ProfilePageState extends State<ProfilePage> {
         ProfileMenuItem(
           icon: Icons.shopping_cart,
           text: 'Pesanan',
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => OrderHistoryPage()),
+            );
+          },
         ),
         ProfileMenuItem(
           icon: Icons.local_offer,
