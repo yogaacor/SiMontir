@@ -1,19 +1,41 @@
 import 'package:flutter/material.dart';
+import 'petapesan.dart'; 
 
-class DetailPesanPage extends StatelessWidget {
+class DetailPesanPage extends StatefulWidget {
+  @override
+  _DetailPesanPageState createState() => _DetailPesanPageState();
+}
+
+class _DetailPesanPageState extends State<DetailPesanPage> {
+  final _merkController = TextEditingController();
+  final _jenisController = TextEditingController();
+  final _tahunController = TextEditingController();
+  final _keluhanController = TextEditingController();
+
+  String? _merkError;
+  String? _jenisError;
+  String? _tahunError;
+  String? _keluhanError;
+
+  void _validateAndProceed() {
+    setState(() {
+      _merkError = _merkController.text.isEmpty ? 'Masukkan merk kendaraan anda' : null;
+      _jenisError = _jenisController.text.isEmpty ? 'Masukkan jenis kendaraan anda' : null;
+      _tahunError = _tahunController.text.isEmpty ? 'Masukkan tahun kendaraan anda' : null;
+      _keluhanError = _keluhanController.text.isEmpty ? 'Masukkan keluhan dari kendaraan anda' : null;
+    });
+
+    if (_merkError == null && _jenisError == null && _tahunError == null && _keluhanError == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PetaPesanPage()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
       body: Stack(
         children: [
           CustomPaint(
@@ -47,8 +69,10 @@ class DetailPesanPage extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       TextField(
+                        controller: _merkController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          errorText: _merkError,
                         ),
                       ),
                       SizedBox(height: 14),
@@ -57,8 +81,10 @@ class DetailPesanPage extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       TextField(
+                        controller: _jenisController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          errorText: _jenisError,
                         ),
                       ),
                       SizedBox(height: 14),
@@ -67,8 +93,10 @@ class DetailPesanPage extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       TextField(
+                        controller: _tahunController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          errorText: _tahunError,
                         ),
                       ),
                       SizedBox(height: 14),
@@ -77,9 +105,13 @@ class DetailPesanPage extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       TextField(
+                        controller: _keluhanController,
                         maxLines: 4,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
+                          errorText: _keluhanError,
+                          hintText: 'Tulis keluhan atau masalah dari kendaraan anda',
+                          hintStyle: TextStyle(color: Colors.grey),
                         ),
                       ),
                       SizedBox(height: 14),
@@ -88,9 +120,7 @@ class DetailPesanPage extends StatelessWidget {
                           backgroundColor: Color(0xFF56BEE1),
                           minimumSize: Size(double.infinity, 50),
                         ),
-                        onPressed: () {
-                          // Add your onPressed code here!
-                        },
+                        onPressed: _validateAndProceed,
                         child: Text(
                           'Lanjut',
                           style: TextStyle(
@@ -109,28 +139,24 @@ class DetailPesanPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_offer),
-            label: 'Promo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.store),
-            label: 'Toko',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        selectedItemColor: Color(0xFF56BEE1),
-        unselectedItemColor: Colors.grey,
-      ),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
+    );
+  }
+
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      elevation: 10,
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+        BottomNavigationBarItem(icon: Icon(Icons.local_offer), label: 'Promo'),
+        BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Toko'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+      ],
+      currentIndex: 0,
+      selectedItemColor: Colors.blue,
+      unselectedItemColor: Colors.grey,
+      onTap: (index) {},
     );
   }
 }
@@ -149,14 +175,14 @@ class TopRightCirclePainter extends CustomPainter {
         stops: [0.7, 1.0],
       ).createShader(Rect.fromCircle(
         center: Offset(size.width, 0),
-        radius: 150,
+        radius: 350,
       ));
 
     final path = Path();
-    path.moveTo(size.width - 150, 0);
+    path.moveTo(size.width - 350, 0);
     path.arcToPoint(
-      Offset(size.width, 150),
-      radius: Radius.circular(150),
+      Offset(size.width, 350),
+      radius: Radius.circular(350),
       clockwise: false,
     );
     path.lineTo(size.width, 0);
