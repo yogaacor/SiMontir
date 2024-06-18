@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pesanmontir.dart';
-import 'caralangganan.dart'; 
+import 'caralangganan.dart';
+import 'syaratlangganan.dart'; 
 
 class DetailLanggananPage extends StatelessWidget {
   void _onBottomNavTapped(int index, BuildContext context) {
@@ -10,7 +11,6 @@ class DetailLanggananPage extends StatelessWidget {
         MaterialPageRoute(builder: (context) => PesanMontirPage()),
       );
     }
-    
   }
 
   @override
@@ -33,10 +33,10 @@ class DetailLanggananPage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.0), 
+                  borderRadius: BorderRadius.circular(16.0),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.15), 
+                      color: Colors.black.withOpacity(0.15),
                       blurRadius: 10,
                       spreadRadius: 5,
                       offset: Offset(0, 5),
@@ -158,7 +158,10 @@ class DetailLanggananPage extends StatelessWidget {
                       title: Text('Syarat dan Ketentuan'),
                       trailing: Icon(Icons.arrow_forward),
                       onTap: () {
-                        // Handle navigation to Syarat dan Ketentuan page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SyaratLanggananPage()),
+                        );
                       },
                     ),
                     Divider(),
@@ -166,7 +169,6 @@ class DetailLanggananPage extends StatelessWidget {
                       title: Text('Aturan pembatalan'),
                       trailing: Icon(Icons.arrow_forward),
                       onTap: () {
-                        // Handle navigation to Aturan pembatalan page
                       },
                     ),
                   ],
@@ -202,14 +204,14 @@ class DetailLanggananPage extends StatelessWidget {
                             style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Icon(Icons.more_horiz, color: Colors.black),  
+                        Icon(Icons.more_horiz, color: Colors.black),
                       ],
                     ),
                     SizedBox(height: 16),
                     Container(
                       padding: EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
-                        color: Colors.grey[600],  
+                        color: Colors.grey[600],
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
@@ -225,7 +227,7 @@ class DetailLanggananPage extends StatelessWidget {
                                 'Rp5.900',
                                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
-                              Icon(Icons.arrow_forward, color: Colors.white), 
+                              Icon(Icons.arrow_forward, color: Colors.white),
                             ],
                           ),
                         ],
@@ -280,7 +282,7 @@ class DetailLanggananPage extends StatelessWidget {
             ],
             selectedItemColor: Color(0xFF56BEE1),
             unselectedItemColor: Colors.grey,
-            currentIndex: 1, 
+            currentIndex: 1,
             onTap: (index) => _onBottomNavTapped(index, context),
           ),
         ),
