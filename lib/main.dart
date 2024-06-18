@@ -8,106 +8,316 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(),
+      title: 'Simontir',
+      home: HomePage(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  void _login() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Perform login logic
-      String username = _usernameController.text;
-      String password = _passwordController.text;
-      // For demonstration, print the values
-      print('Username: $username');
-      print('Password: $password');
-
-      // You can add your own authentication logic here
-      // For example, send the credentials to a server for verification
-
-      // Clear the fields after login
-      _usernameController.clear();
-      _passwordController.clear();
-
-      // Navigate to the next screen or show a success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login successful!')),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login Page'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  border: OutlineInputBorder(),
+              Container(
+                height: 320, // Height of the blue header
+                child: CustomPaint(
+                  painter: HeaderPainter(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 90),
+                        Text(
+                          'Hai! Selamat Datang Teguh Kukuh',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Row(
+                                children: [
+                                  Icon(Icons.attach_money),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Rp0,-',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                height: 24,
+                                child: VerticalDivider(color: Colors.grey),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.money),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    '0',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                height: 24,
+                                child: VerticalDivider(color: Colors.grey),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.wallet_giftcard),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Isi saldo',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your username';
-                  }
-                  return null;
-                },
               ),
-              SizedBox(height: 16.0),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
+              SizedBox(height: 10), // Adjusted to place the button just below the semicircle
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 98, 173, 211), // slightly darker blue
+                    minimumSize: Size(double.infinity, 50),
+                  ),
+                  onPressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => DetailPesanPage()),
+                    // );
+                  },
+                  child: Text(
+                    'Pesan SiMontir Sekarang',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20, // Increase font size
+                      letterSpacing: 2.0, // Add letter spacing
+                    ),
+                  ),
                 ),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
               ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: _login,
-                child: Text('Login'),
+              SizedBox(height: 20), // Increased the distance between the button and the gray container
+              Container(
+                color: Colors.grey[300],
+                height: 80,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Lebih lanjut'),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Produk Rekomendasi',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ProductCard(),
+                    ProductCard(),
+                    ProductCard(),
+                  ],
+                ),
               ),
             ],
           ),
-        ),
+          Positioned(
+            top: 50,
+            left: 16,
+            right: 140, // Adjusted to make room for the buttons
+            child: SearchBarWithIcons(),
+          ),
+          Positioned(
+            top: 50,
+            right: 16,
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.notifications, color: Colors.white, size: 30),
+                  onPressed: () {
+                    // Handle notification button press
+                  },
+                ),
+                SizedBox(width: 10),
+                IconButton(
+                  icon: Icon(Icons.chat, color: Colors.white, size: 30),
+                  onPressed: () {
+                    // Handle chat button press
+                  },
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, -3),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                child: BottomNavigationBar(
+                  items: const <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'Beranda',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.local_offer),
+                      label: 'Promo',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.store),
+                      label: 'Toko',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.person),
+                      label: 'Profil',
+                    ),
+                  ],
+                  selectedItemColor: Color(0xFF56BEE1),
+                  unselectedItemColor: Colors.grey,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
+  }
+}
+
+class SearchBarWithIcons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Row(
+        children: [
+          SizedBox(width: 16), // Adjusted for better alignment
+          Icon(Icons.search, color: Colors.grey),
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Cari Produk/Layanan',
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(horizontal: 8),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(8.0),
+      width: 150,
+      height: 200,
+      color: Colors.grey[300],
+    );
+  }
+}
+
+class HeaderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Color(0xFF56BEE1)
+      ..style = PaintingStyle.fill;
+
+    final path = Path();
+    path.moveTo(0, size.height * 0.8);
+    path.quadraticBezierTo(
+      size.width * 0.6,
+      size.height * 1.005,
+      size.width,
+      size.height * 0.65,
+    );
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+    path.close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
