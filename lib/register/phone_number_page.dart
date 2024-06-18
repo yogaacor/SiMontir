@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:simontir/persona_info_page.dart';
+import 'package:simontir/register/persona_info_page.dart';
 //import 'package:simontir/personal_info_page.dart'; // Import halaman baru
 
 class PhoneNumberPage extends StatefulWidget {
+  const PhoneNumberPage({super.key});
+
   @override
   _PhoneNumberPageState createState() => _PhoneNumberPageState();
 }
