@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'pesanmontir.dart'; // Import the pesanmontir.dart file
+import 'pesanmontir.dart';
+import 'detaillangganan.dart';
 
 class LanggananPage extends StatelessWidget {
   void _onBottomNavTapped(int index, BuildContext context) {
     if (index == 0) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PesanMontirPage()), // Pindah ke halaman pesanmontir
+        MaterialPageRoute(builder: (context) => PesanMontirPage()),
       );
     }
-    // Tambahkan logika navigasi untuk halaman lain di sini jika diperlukan
+    
   }
 
   @override
@@ -36,13 +37,13 @@ class LanggananPage extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pop(context); // Navigate back to voucher page
+                            Navigator.pop(context); 
                           },
                           child: Container(
                             padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
-                              color: Colors.grey.withOpacity(0.2), // Faded for voucher
+                              color: Colors.grey.withOpacity(0.2), 
                             ),
                             child: Center(
                               child: Text(
@@ -59,7 +60,7 @@ class LanggananPage extends StatelessWidget {
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
-                            color: Colors.blue.withOpacity(0.2), // Highlighted for subscription
+                            color: Colors.blue.withOpacity(0.2), 
                           ),
                           child: Center(
                             child: Text(
@@ -115,7 +116,7 @@ class LanggananPage extends StatelessWidget {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 3, // Assuming there are 3 subscriptions for demonstration
+                    itemCount: 3, 
                     itemBuilder: (context, index) {
                       return Card(
                         margin: EdgeInsets.symmetric(vertical: 8.0),
@@ -159,7 +160,12 @@ class LanggananPage extends StatelessWidget {
                                 alignment: Alignment.centerRight,
                                 child: OutlinedButton(
                                   onPressed: () {
-                                    // Handle "Lebih lanjut" button press
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>DetailLanggananPage(),
+                                      ),
+                                    );
                                   },
                                   child: Text('Lebih lanjut'),
                                 ),
@@ -213,7 +219,7 @@ class LanggananPage extends StatelessWidget {
             ],
             selectedItemColor: Color(0xFF56BEE1),
             unselectedItemColor: Colors.grey,
-            currentIndex: 1, // Set the selected index to 1 (promo)
+            currentIndex: 1, 
             onTap: (index) => _onBottomNavTapped(index, context),
           ),
         ),

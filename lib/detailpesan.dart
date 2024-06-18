@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'petapesan.dart'; 
-import 'promo.dart'; // Tambahkan impor untuk halaman promo
+import 'promo.dart';
 
 class DetailPesanPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _DetailPesanPageState extends State<DetailPesanPage> {
   String? _tahunError;
   String? _keluhanError;
 
-  int _selectedIndex = 0; // Set default selected index to 0 (Beranda)
+  int _selectedIndex = 0;
 
   void _validateAndProceed() {
     setState(() {
@@ -40,12 +40,12 @@ class _DetailPesanPageState extends State<DetailPesanPage> {
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PromoPage()), // Pindah ke halaman promo
+        MaterialPageRoute(builder: (context) => PromoPage()), 
       );
     } else {
       setState(() {
         _selectedIndex = index;
-        // Anda bisa menambahkan logika navigasi untuk halaman lain di sini
+        
       });
     }
   }

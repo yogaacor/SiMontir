@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'langganan.dart'; // Import the new langganan.dart file
-import 'pesanmontir.dart'; // Import the pesanmontir.dart file
-
+import 'langganan.dart'; 
+import 'pesanmontir.dart'; 
 class VoucherPage extends StatefulWidget {
   @override
   _VoucherPageState createState() => _VoucherPageState();
 }
 
 class _VoucherPageState extends State<VoucherPage> {
-  List<int> voucherCounts = [2, 2, 2, 2, 2, 2]; // Initial voucher counts
-  int selectedCategoryIndex = 0; // To highlight "Semua" button
+  List<int> voucherCounts = [2, 2, 2, 2, 2, 2]; 
+  int selectedCategoryIndex = 0; 
 
   void _showConfirmationDialog(BuildContext context, int index) {
     showDialog(
@@ -78,10 +77,10 @@ class _VoucherPageState extends State<VoucherPage> {
     if (index == 0) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PesanMontirPage()), // Pindah ke halaman pesanmontir
+        MaterialPageRoute(builder: (context) => PesanMontirPage()), 
       );
     }
-    // Tambahkan logika navigasi untuk halaman lain di sini jika diperlukan
+    
   }
 
   Widget _buildCategoryButton(String text, int index) {
@@ -123,7 +122,7 @@ class _VoucherPageState extends State<VoucherPage> {
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
-                            color: Colors.blue.withOpacity(0.2), // Highlighted for voucher
+                            color: Colors.blue.withOpacity(0.2), 
                           ),
                           child: Center(
                             child: Text(
@@ -141,7 +140,7 @@ class _VoucherPageState extends State<VoucherPage> {
                             padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
-                              color: Colors.grey.withOpacity(0.2), // Faded for subscription
+                              color: Colors.grey.withOpacity(0.2), 
                             ),
                             child: Center(
                               child: Text(
@@ -170,7 +169,7 @@ class _VoucherPageState extends State<VoucherPage> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: voucherCounts.length,
                     itemBuilder: (context, index) {
-                      if (voucherCounts[index] == 0) return SizedBox.shrink(); // Hide if no vouchers left
+                      if (voucherCounts[index] == 0) return SizedBox.shrink(); 
 
                       return Card(
                         elevation: 2,
@@ -223,7 +222,7 @@ class _VoucherPageState extends State<VoucherPage> {
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(8),
                                         ),
-                                        minimumSize: Size(100, 30), // Adjust the size as needed
+                                        minimumSize: Size(100, 30), 
                                       ),
                                       child: Text(
                                         'Pakai',
@@ -286,7 +285,7 @@ class _VoucherPageState extends State<VoucherPage> {
             ],
             selectedItemColor: Color(0xFF56BEE1),
             unselectedItemColor: Colors.grey,
-            currentIndex: 1, // Set the selected index to 1 (promo)
+            currentIndex: 1, 
             onTap: _onBottomNavTapped,
           ),
         ),

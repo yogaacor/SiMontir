@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'voucher.dart';
-import 'pesanmontir.dart'; // Tambahkan impor untuk halaman pesanmontir
+import 'pesanmontir.dart'; 
 
 class PromoPage extends StatelessWidget {
   @override
@@ -109,15 +109,15 @@ class PromoPage extends StatelessWidget {
                   SizedBox(height: 8),
                   Container(
                     width: double.infinity,
-                    height: 200, // Menambah ukuran tinggi
+                    height: 200, 
                     child: PageView.builder(
-                      itemCount: 6, // Number of promo banners
+                      itemCount: 6, 
                       controller: PageController(viewportFraction: 0.9),
                       itemBuilder: (context, index) {
                         return Container(
                           margin: EdgeInsets.symmetric(horizontal: 4.0),
                           decoration: BoxDecoration(
-                            color: Colors.blue, // Placeholder for the promo banner image
+                            color: Colors.blue, 
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Center(
@@ -140,12 +140,12 @@ class PromoPage extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Mengubah menjadi 2 kolom
+                      crossAxisCount: 2, 
                       childAspectRatio: 0.8,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                     ),
-                    itemCount: 6, // Number of promo items
+                    itemCount: 6, 
                     itemBuilder: (context, index) {
                       return Card(
                         elevation: 2,
@@ -234,15 +234,15 @@ class PromoPage extends StatelessWidget {
             ],
             selectedItemColor: Color(0xFF56BEE1),
             unselectedItemColor: Colors.grey,
-            currentIndex: 1, // Set the selected index to 1 (promo)
+            currentIndex: 1, 
             onTap: (index) {
               if (index == 0) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PesanMontirPage()), // Pindah ke halaman pesanmontir
+                  MaterialPageRoute(builder: (context) => PesanMontirPage()), 
                 );
               }
-              // Tambahkan logika navigasi untuk halaman lain di sini jika diperlukan
+              
             },
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'detailpesan.dart';
-import 'promo.dart'; // Tambahkan impor untuk halaman promo
+import 'promo.dart'; 
 
 class PesanMontirPage extends StatefulWidget {
   @override
@@ -9,7 +9,7 @@ class PesanMontirPage extends StatefulWidget {
 
 class _PesanMontirPageState extends State<PesanMontirPage> {
   String _selectedVehicle = '';
-  int _selectedIndex = 0; // Set default selected index to 0 (Beranda)
+  int _selectedIndex = 0; 
 
   void _selectVehicle(String vehicle) {
     setState(() {
@@ -21,12 +21,12 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PromoPage()), // Pindah ke halaman promo
+        MaterialPageRoute(builder: (context) => PromoPage()), 
       );
     } else {
       setState(() {
         _selectedIndex = index;
-        // Anda bisa menambahkan logika navigasi untuk halaman lain di sini
+        
       });
     }
   }
@@ -40,7 +40,7 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                height: 320, // Height of the blue header
+                height: 320, 
                 child: CustomPaint(
                   painter: HeaderPainter(),
                   child: Padding(
@@ -60,7 +60,7 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 10), // Add space between the two lines of text
+                            SizedBox(height: 10), 
                             Text(
                               'Jangan panik, kita akan segera mengirim \nbantuan, jelaskan apa jenis kendaraan anda?',
                               style: TextStyle(
@@ -75,7 +75,7 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 30), // Add space between header and images
+              SizedBox(height: 30), 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Row(
@@ -91,7 +91,7 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 98, 173, 211), // slightly darker blue
+                    backgroundColor: Color.fromARGB(255, 98, 173, 211), 
                     minimumSize: Size(double.infinity, 50),
                   ),
                   onPressed: () {
@@ -105,8 +105,8 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20, // Increase font size
-                      letterSpacing: 2.0, // Add letter spacing
+                      fontSize: 20, 
+                      letterSpacing: 2.0, 
                     ),
                   ),
                 ),
@@ -180,7 +180,7 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
             width: 120,
             height: 120,
             decoration: BoxDecoration(
-              color: isSelected ? Color.fromARGB(255, 133, 165, 193) : Colors.grey[400], // Highlight selected vehicle
+              color: isSelected ? Color.fromARGB(255, 133, 165, 193) : Colors.grey[400], 
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
