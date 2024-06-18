@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
 class ProductSearchPage extends StatefulWidget {
   @override
-  _ProductSearchPageState createState() => createState();
+  _ProductSearchPageState createState() => _ProductSearchPageState();
 }
 
 class _ProductSearchPageState extends State<ProductSearchPage> {
@@ -58,6 +58,10 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {},
+        ),
         title: Text('Cari Produk'),
       ),
       body: Column(
@@ -93,7 +97,7 @@ class _ProductSearchPageState extends State<ProductSearchPage> {
           ),
           if (searchHistory.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.only(bottom:90.0, top: 8.0), // Added bottom padding
+              padding: const EdgeInsets.only(bottom: 20.0, top: 8.0),
               child: Center(
                 child: ElevatedButton(
                   onPressed: _clearSearchHistory,
