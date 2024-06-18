@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'petapesan.dart'; 
+import 'promo.dart'; // Tambahkan impor untuk halaman promo
 
 class DetailPesanPage extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ class _DetailPesanPageState extends State<DetailPesanPage> {
   String? _tahunError;
   String? _keluhanError;
 
+  int _selectedIndex = 0; // Set default selected index to 0 (Beranda)
+
   void _validateAndProceed() {
     setState(() {
       _merkError = _merkController.text.isEmpty ? 'Masukkan merk kendaraan anda' : null;
@@ -30,6 +33,20 @@ class _DetailPesanPageState extends State<DetailPesanPage> {
         context,
         MaterialPageRoute(builder: (context) => PetaPesanPage()),
       );
+    }
+  }
+
+  void _onItemTapped(int index) {
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PromoPage()), // Pindah ke halaman promo
+      );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+        // Anda bisa menambahkan logika navigasi untuk halaman lain di sini
+      });
     }
   }
 
@@ -138,6 +155,48 @@ class _DetailPesanPageState extends State<DetailPesanPage> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, -3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Beranda',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.local_offer),
+                label: 'Promo',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.store),
+                label: 'Toko',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profil',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Color(0xFF56BEE1),
+            unselectedItemColor: Colors.grey,
+            onTap: _onItemTapped,
+          ),
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'detailpesan.dart';
+import 'promo.dart'; // Tambahkan impor untuk halaman promo
 
 class PesanMontirPage extends StatefulWidget {
   @override
@@ -8,11 +9,26 @@ class PesanMontirPage extends StatefulWidget {
 
 class _PesanMontirPageState extends State<PesanMontirPage> {
   String _selectedVehicle = '';
+  int _selectedIndex = 0; // Set default selected index to 0 (Beranda)
 
   void _selectVehicle(String vehicle) {
     setState(() {
       _selectedVehicle = vehicle;
     });
+  }
+
+  void _onItemTapped(int index) {
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PromoPage()), // Pindah ke halaman promo
+      );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+        // Anda bisa menambahkan logika navigasi untuk halaman lain di sini
+      });
+    }
   }
 
   @override
@@ -109,6 +125,48 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
           ),
         ],
       ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, -3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Beranda',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.local_offer),
+                label: 'Promo',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.store),
+                label: 'Toko',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profil',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Color(0xFF56BEE1),
+            unselectedItemColor: Colors.grey,
+            onTap: _onItemTapped,
+          ),
+        ),
+      ),
     );
   }
 
@@ -128,8 +186,8 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
             child: Center(
               child: Image.asset(
                 imagePath,
-                width: 100, 
-                height: 100, 
+                width: 100,
+                height: 100,
               ),
             ),
           ),
@@ -157,9 +215,9 @@ class HeaderPainter extends CustomPainter {
     final path = Path();
     path.moveTo(0, size.height * 0.8);
     path.quadraticBezierTo(
-      size.width * 0.6, 
-      size.height * 1.005, 
-      size.width, 
+      size.width * 0.6,
+      size.height * 1.005,
+      size.width,
       size.height * 0.65,
     );
     path.lineTo(size.width, 0);

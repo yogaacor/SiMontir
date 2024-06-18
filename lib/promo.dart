@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'voucher.dart';
+import 'pesanmontir.dart'; // Tambahkan impor untuk halaman pesanmontir
 
 class PromoPage extends StatelessWidget {
   @override
@@ -194,6 +195,56 @@ class PromoPage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, -3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Beranda',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.local_offer),
+                label: 'Promo',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.store),
+                label: 'Toko',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profil',
+              ),
+            ],
+            selectedItemColor: Color(0xFF56BEE1),
+            unselectedItemColor: Colors.grey,
+            currentIndex: 1, // Set the selected index to 1 (promo)
+            onTap: (index) {
+              if (index == 0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PesanMontirPage()), // Pindah ke halaman pesanmontir
+                );
+              }
+              // Tambahkan logika navigasi untuk halaman lain di sini jika diperlukan
+            },
+          ),
         ),
       ),
     );

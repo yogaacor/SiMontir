@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'langganan.dart'; // Import the new langganan.dart file
+import 'pesanmontir.dart'; // Import the pesanmontir.dart file
 
 class VoucherPage extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class VoucherPage extends StatefulWidget {
 
 class _VoucherPageState extends State<VoucherPage> {
   List<int> voucherCounts = [2, 2, 2, 2, 2, 2]; // Initial voucher counts
+  int selectedCategoryIndex = 0; // To highlight "Semua" button
 
   void _showConfirmationDialog(BuildContext context, int index) {
     showDialog(
@@ -58,6 +61,42 @@ class _VoucherPageState extends State<VoucherPage> {
     );
   }
 
+  void _navigateToLangganan(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LanggananPage()),
+    );
+  }
+
+  void _onCategorySelected(int index) {
+    setState(() {
+      selectedCategoryIndex = index;
+    });
+  }
+
+  void _onBottomNavTapped(int index) {
+    if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PesanMontirPage()), // Pindah ke halaman pesanmontir
+      );
+    }
+    // Tambahkan logika navigasi untuk halaman lain di sini jika diperlukan
+  }
+
+  Widget _buildCategoryButton(String text, int index) {
+    return TextButton(
+      onPressed: () => _onCategorySelected(index),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: selectedCategoryIndex == index ? Colors.blue : Colors.black,
+          fontWeight: selectedCategoryIndex == index ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,16 +135,19 @@ class _VoucherPageState extends State<VoucherPage> {
                       ),
                       SizedBox(width: 10),
                       Expanded(
-                        child: Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            color: Colors.grey.withOpacity(0.2), // Faded for subscription
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Langganan',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        child: GestureDetector(
+                          onTap: () => _navigateToLangganan(context),
+                          child: Container(
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                              color: Colors.grey.withOpacity(0.2), // Faded for subscription
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Langganan',
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),
@@ -116,22 +158,10 @@ class _VoucherPageState extends State<VoucherPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text('Semua'),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text('Bengkel'),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text('Toko'),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text('Ongkir'),
-                      ),
+                      _buildCategoryButton('Semua', 0),
+                      _buildCategoryButton('Bengkel', 1),
+                      _buildCategoryButton('Toko', 2),
+                      _buildCategoryButton('Ongkir', 3),
                     ],
                   ),
                   SizedBox(height: 16),
@@ -159,7 +189,7 @@ class _VoucherPageState extends State<VoucherPage> {
                                   topRight: Radius.circular(10.0),
                                 ),
                                 image: DecorationImage(
-                                  image: AssetImage('images/diskon.png'), // Path to your voucher image
+                                  image: AssetImage('images/diskon.png'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -217,6 +247,48 @@ class _VoucherPageState extends State<VoucherPage> {
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, -3),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Beranda',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.local_offer),
+                label: 'Promo',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.store),
+                label: 'Toko',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profil',
+              ),
+            ],
+            selectedItemColor: Color(0xFF56BEE1),
+            unselectedItemColor: Colors.grey,
+            currentIndex: 1, // Set the selected index to 1 (promo)
+            onTap: _onBottomNavTapped,
+          ),
         ),
       ),
     );
