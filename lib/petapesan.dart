@@ -96,27 +96,10 @@ class _PetaPesanPageState extends State<PetaPesanPage> {
           ),
         ],
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
   void _onEditLocation() {
-  }
-
-  Widget _buildBottomNavigationBar(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.white,
-      elevation: 10,
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-        BottomNavigationBarItem(icon: Icon(Icons.local_offer), label: 'Promo'),
-        BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Toko'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
-      ],
-      currentIndex: 3,
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
-      onTap: (index) {},
-    );
+    // Handle edit location button press
   }
 }

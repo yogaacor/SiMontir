@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'detailpesan.dart';
 
-class CustomPage extends StatefulWidget {
+class PesanMontirPage extends StatefulWidget {
   @override
-  _CustomPageState createState() => _CustomPageState();
+  _PesanMontirPageState createState() => _PesanMontirPageState();
 }
 
-class _CustomPageState extends State<CustomPage> {
+class _PesanMontirPageState extends State<PesanMontirPage> {
   String _selectedVehicle = '';
 
   void _selectVehicle(String vehicle) {
@@ -107,51 +107,6 @@ class _CustomPageState extends State<CustomPage> {
               },
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, -3),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-                child: BottomNavigationBar(
-                  items: const <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.home),
-                      label: 'Beranda',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.local_offer),
-                      label: 'Promo',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.store),
-                      label: 'Toko',
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.person),
-                      label: 'Profil',
-                    ),
-                  ],
-                  selectedItemColor: Color(0xFF56BEE1),
-                  unselectedItemColor: Colors.grey,
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -173,8 +128,8 @@ class _CustomPageState extends State<CustomPage> {
             child: Center(
               child: Image.asset(
                 imagePath,
-                width: 100, // Decreased size of the image
-                height: 100, // Decreased size of the image
+                width: 100, 
+                height: 100, 
               ),
             ),
           ),
