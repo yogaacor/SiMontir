@@ -112,31 +112,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10), // Adjusted to place the button just below the semicircle
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 19.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 98, 173, 211), // slightly darker blue
-                    minimumSize: Size(double.infinity, 50),
-                  ),
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => DetailPesanPage()),
-                    // );
-                  },
-                  child: Text(
-                    'Flash Sale!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20, // Increase font size
-                      letterSpacing: 2.0, // Add letter spacing
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(height: 20), // Increased the distance between the button and the gray container
               Container(
                 color: Colors.grey[300],
@@ -252,12 +227,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
 class SearchBarWithIcons extends StatelessWidget {
+  const SearchBarWithIcons({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -265,11 +241,11 @@ class SearchBarWithIcons extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(width: 16), // Adjusted for better alignment
-          Icon(Icons.search, color: Colors.grey),
+          const SizedBox(width: 16),
+          const Icon(Icons.search, color: Colors.grey),
           Expanded(
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Cari Produk/Layanan',
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 8),
