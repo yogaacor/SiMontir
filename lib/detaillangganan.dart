@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pesanmontir.dart'; 
+import 'pesanmontir.dart';
+import 'caralangganan.dart'; 
 
 class DetailLanggananPage extends StatelessWidget {
   void _onBottomNavTapped(int index, BuildContext context) {
@@ -32,10 +33,10 @@ class DetailLanggananPage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(16.0), 
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withOpacity(0.15), 
                       blurRadius: 10,
                       spreadRadius: 5,
                       offset: Offset(0, 5),
@@ -99,7 +100,7 @@ class DetailLanggananPage extends StatelessWidget {
                               SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  'Bebas tarif',
+                                  'Bebas tarif rame',
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ),
@@ -118,7 +119,7 @@ class DetailLanggananPage extends StatelessWidget {
                               SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  'Diskon 20% untuk 90 hari berlaku sejak 17 Jun.',
+                                  'Diskon 20% untuk 90 hari berlaku sejak 7 Mar.',
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ),
@@ -143,10 +144,13 @@ class DetailLanggananPage extends StatelessWidget {
                     ),
                     Divider(),
                     ListTile(
-                      title: Text('Cara Penggunaan'),
+                      title: Text('Cara pakai'),
                       trailing: Icon(Icons.arrow_forward),
                       onTap: () {
-                        // Handle navigation to Cara pakai page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CaraLanggananPage()),
+                        );
                       },
                     ),
                     Divider(),
@@ -159,7 +163,7 @@ class DetailLanggananPage extends StatelessWidget {
                     ),
                     Divider(),
                     ListTile(
-                      title: Text('Aturan Pembatalan'),
+                      title: Text('Aturan pembatalan'),
                       trailing: Icon(Icons.arrow_forward),
                       onTap: () {
                         // Handle navigation to Aturan pembatalan page
@@ -198,14 +202,14 @@ class DetailLanggananPage extends StatelessWidget {
                             style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Icon(Icons.more_horiz, color: Colors.black), 
+                        Icon(Icons.more_horiz, color: Colors.black),  
                       ],
                     ),
                     SizedBox(height: 16),
                     Container(
                       padding: EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 159, 153, 153), 
+                        color: Colors.grey[600],  
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
@@ -221,7 +225,7 @@ class DetailLanggananPage extends StatelessWidget {
                                 'Rp5.900',
                                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
-                              Icon(Icons.arrow_forward, color: Colors.white),
+                              Icon(Icons.arrow_forward, color: Colors.white), 
                             ],
                           ),
                         ],
@@ -229,7 +233,7 @@ class DetailLanggananPage extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Perbarui otomatis di 17 Jun. Batalin kapan aja',
+                      'Perbarui otomatis di 7 Mar. Batalin kapan aja',
                       style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                     ),
                   ],
