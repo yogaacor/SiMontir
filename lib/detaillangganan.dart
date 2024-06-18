@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pesanmontir.dart';
 import 'caralangganan.dart';
 import 'syaratlangganan.dart'; 
+import 'pembatalanlangganan.dart';
 
 class DetailLanggananPage extends StatelessWidget {
   void _onBottomNavTapped(int index, BuildContext context) {
@@ -169,6 +170,10 @@ class DetailLanggananPage extends StatelessWidget {
                       title: Text('Aturan pembatalan'),
                       trailing: Icon(Icons.arrow_forward),
                       onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PembatalanLanggananPage()),
+                        );
                       },
                     ),
                   ],
