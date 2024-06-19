@@ -16,7 +16,7 @@ class LangganankuPage extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {
-              // Handle back button press
+              Navigator.of(context).pop();
             },
           ),
           bottom: TabBar(
