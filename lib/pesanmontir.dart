@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'detailpesan.dart';
-import 'promo.dart'; 
+import 'promo.dart';
 
 class PesanMontirPage extends StatefulWidget {
   @override
@@ -9,7 +11,10 @@ class PesanMontirPage extends StatefulWidget {
 
 class _PesanMontirPageState extends State<PesanMontirPage> {
   String _selectedVehicle = '';
-  int _selectedIndex = 0; 
+  int _selectedIndex = 0;
+  DateTime? _startDate;
+  DateTime? _endDate;
+  List<DateTime> _weekends = [];
 
   void _selectVehicle(String vehicle) {
     setState(() {
@@ -21,14 +26,51 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PromoPage()), 
+        MaterialPageRoute(builder: (context) => PromoPage()),
       );
     } else {
       setState(() {
         _selectedIndex = index;
-        
       });
     }
+  }
+
+  Future<void> _selectDateRange() async {
+    DateTimeRange? picked = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color(0xFF56BEE1), // Header background color
+            colorScheme: ColorScheme.light(primary: const Color(0xFF56BEE1)),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null && picked.start != null && picked.end != null) {
+      setState(() {
+        _startDate = picked.start;
+        _endDate = picked.end;
+        _weekends = _getWeekendsInRange(_startDate!, _endDate!);
+      });
+    }
+  }
+
+  List<DateTime> _getWeekendsInRange(DateTime start, DateTime end) {
+    List<DateTime> weekends = [];
+    DateTime current = start;
+    while (current.isBefore(end) || current.isAtSameMomentAs(end)) {
+      if (current.weekday == DateTime.saturday || current.weekday == DateTime.sunday) {
+        weekends.add(current);
+      }
+      current = current.add(Duration(days: 1));
+    }
+    return weekends;
   }
 
   @override
@@ -40,13 +82,13 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                height: 320, 
+                height: 320,
                 child: CustomPaint(
                   painter: HeaderPainter(),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +102,7 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 10), 
+                            SizedBox(height: 10),
                             Text(
                               'Jangan panik, kita akan segera mengirim \nbantuan, jelaskan apa jenis kendaraan anda?',
                               style: TextStyle(
@@ -70,12 +112,16 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                             ),
                           ],
                         ),
+                        IconButton(
+                          icon: Icon(Icons.calendar_today, color: Colors.white),
+                          onPressed: _selectDateRange,
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 30), 
+              SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Row(
@@ -86,12 +132,12 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 90),
+              SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 98, 173, 211), 
+                    backgroundColor: Color.fromARGB(255, 98, 173, 211),
                     minimumSize: Size(double.infinity, 50),
                   ),
                   onPressed: () {
@@ -105,12 +151,33 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20, 
-                      letterSpacing: 2.0, 
+                      fontSize: 20,
+                      letterSpacing: 2.0,
                     ),
                   ),
                 ),
               ),
+              if (_startDate != null && _endDate != null)
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hari Sabtu dan Minggu antara ${DateFormat('dd MMM yyyy').format(_startDate!)} dan ${DateFormat('dd MMM yyyy').format(_endDate!)}:',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      ..._weekends.map((date) => Text(
+                        DateFormat('EEEE, dd MMM yyyy').format(date),
+                        style: TextStyle(fontSize: 16),
+                      )),
+                    ],
+                  ),
+                ),
             ],
           ),
           Positioned(
@@ -180,7 +247,7 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
             width: 120,
             height: 120,
             decoration: BoxDecoration(
-              color: isSelected ? Color.fromARGB(255, 133, 165, 193) : Colors.grey[400], 
+              color: isSelected ? Color.fromARGB(255, 133, 165, 193) : Colors.grey[400],
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
@@ -234,7 +301,7 @@ class HeaderPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
 }

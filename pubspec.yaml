@@ -37,6 +37,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  intl: ^0.17.0
+  table_calendar: ^3.0.6
 
   google_maps_flutter: ^2.1.1
   location: ^4.3.0
