@@ -30,9 +30,9 @@ class OrderHistoryPage extends StatelessWidget {
           color: Colors.white, // Set the background color to white
           child: TabBarView(
             children: [
-              OrderListView(),
-              OrderListView(),
-              OrderListView(),
+              OrderListView(status: 'riwayat'),
+              OrderListView(status: 'dalam_proses'),
+              OrderListView(status: 'terjadwal'),
             ],
           ),
         ),
@@ -82,20 +82,41 @@ class OrderHistoryPage extends StatelessWidget {
 }
 
 class OrderListView extends StatelessWidget {
+  final String status;
+
+  OrderListView({required this.status});
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 3, // Replace with your dynamic item count
       itemBuilder: (context, index) {
-        return OrderCard();
+        return OrderCard(status: status);
       },
     );
   }
 }
 
 class OrderCard extends StatelessWidget {
+  final String status;
+
+  OrderCard({required this.status});
+
   @override
   Widget build(BuildContext context) {
+    String deliveryStatus;
+    IconData iconData;
+    if (status == 'dalam_proses') {
+      deliveryStatus = 'Sedang dalam proses';
+      iconData = Icons.hourglass_empty;
+    } else if (status == 'terjadwal') {
+      deliveryStatus = 'Dikirim pada hari rabu';
+      iconData = Icons.local_shipping;
+    } else {
+      deliveryStatus = 'Sudah dikirim';
+      iconData = Icons.check_circle;
+    }
+
     return Card(
       color: Colors.white, // Set the background color of the card to white
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -144,14 +165,20 @@ class OrderCard extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
+                            iconData,
+                            color: deliveryStatus == 'Sudah dikirim'
+                                ? Colors.green
+                                : Colors.orange,
                             size: 16,
                           ),
                           SizedBox(width: 4),
                           Text(
-                            'Sudah dikirim',
-                            style: TextStyle(color: Colors.green),
+                            deliveryStatus,
+                            style: TextStyle(
+                              color: deliveryStatus == 'Sudah dikirim'
+                                  ? Colors.green
+                                  : Colors.orange,
+                            ),
                           ),
                         ],
                       ),
