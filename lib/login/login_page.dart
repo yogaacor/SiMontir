@@ -37,7 +37,6 @@ class LoginPage extends StatelessWidget {
                 // Tombol Masuk
                 ElevatedButton(
                   onPressed: () {
-                    // Navigasi ke halaman InputDataPage saat tombol 'Masuk' ditekan
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => InputDataPage()),
@@ -57,7 +56,6 @@ class LoginPage extends StatelessWidget {
                 // Tombol Register
                 OutlinedButton(
                   onPressed: () {
-                    // Navigasi ke EmailPasswordLoginPage saat tombol "Daftar dulu" ditekan
                     Navigator.push(
                       context,
                       MaterialPageRoute(
