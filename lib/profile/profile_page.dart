@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -124,16 +124,15 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Container(
-            width: 30, // Ubah ukuran lebar lingkaran
-            height: 30, // Ubah ukuran tinggi lingkaran
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
-              color: Color.fromARGB(
-                  255, 129, 198, 255), // Pastikan warna lingkaran biru
+              color: Color.fromARGB(255, 129, 198, 255),
               shape: BoxShape.circle,
             ),
             child: IconButton(
               icon: Icon(Icons.edit, color: Colors.white),
-              iconSize: 16, // Perkecil ukuran ikon
+              iconSize: 16,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -222,31 +221,53 @@ class _ProfilePageState extends State<ProfilePage> {
         ProfileMenuItem(
           icon: Icons.settings,
           text: 'Atur Akun',
-          onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => EditProfilePage()),
-            // );
-          },
+          onTap: () {},
         ),
       ],
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: Colors.white,
-      elevation: 10,
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-        BottomNavigationBarItem(icon: Icon(Icons.local_offer), label: 'Promo'),
-        BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Toko'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
-      ],
-      currentIndex: 3,
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
-      onTap: (index) {},
+  Widget _buildBottomNavigationBar() {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, -3),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        child: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Beranda',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.local_offer),
+              label: 'Promo',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.store),
+              label: 'Toko',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profil',
+            ),
+          ],
+          currentIndex: 3,
+          selectedItemColor: Color(0xFF56BEE1),
+          unselectedItemColor: Colors.grey,
+        ),
+      ),
     );
   }
 }
