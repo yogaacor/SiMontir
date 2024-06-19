@@ -36,30 +36,45 @@ class OrderHistoryPage extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors
-              .white, // Set the BottomNavigationBar background color to white
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Beranda',
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, -3),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer),
-              label: 'Promo',
+            child: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Beranda',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.local_offer),
+                  label: 'Promo',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.store),
+                  label: 'Toko',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Profil',
+                ),
+              ],
+              selectedItemColor: Color(0xFF56BEE1),
+              unselectedItemColor: Colors.grey,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.store),
-              label: 'Toko',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profil',
-            ),
-          ],
-          selectedItemColor: Colors.blue, // Set the selected item color to blue
-          unselectedItemColor: Colors.grey,
+          ),
         ),
       ),
     );
