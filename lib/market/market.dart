@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'chat_market.dart';
 
 void main() {
   runApp(MyApp());
@@ -171,6 +172,10 @@ class _HomePageState extends State<HomePage> {
                 IconButton(
                   icon: Icon(Icons.chat, color: Colors.white, size: 30),
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChatScreen()),
+                    );
                     // Handle chat button press
                   },
                 ),
