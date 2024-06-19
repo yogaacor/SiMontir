@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simontir/UAS.dart';
+
 import 'package:simontir/profile/profile_page.dart';
 import 'login/login_page.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Login Screen',
-      home: LoginPage(),
-    );
-  }
+      home: ProfilePage(),
+    );
+  }
 }
