@@ -1,16 +1,6 @@
-# simontir
+# SiMontir
 
-A new Flutter project.
+## LATAR BELAKANG
+Dalam era digital yang terus berkembang, kebutuhan akan layanan servis kendaraan yang praktis dan efisien semakin meningkat. Salah satu sektor yang mengalami tantangan signifikan dalam hal ini adalah layanan perbengkelan kendaraan. meskipun bengkel konvensional telah menjadi rujukan utama bagi banyak pemilik kendaraan, bengkel konvensional memiliki sejumlah kelemahan yang dapat menghambat kenyamanan dan efisiensi pelayanan. Pengguna sering kali harus menunggu dalam waktu yang lama untuk mendapatkan layanan di bengkel konvensional tersebut. Selain itu, banyak bengkel konvensional tidak memiliki sistem informasi yang terintegrasi. Pengguna seringkali kesulitan mendapatkan informasi tentang status perbaikan kendaraan mereka. Keterbatasan akses juga menjadi masalah signifikan, hal ini dikarenakan bengkel seringkali beroperasi dengan jam yang terbatas dan lokasi yang tidak selalu mudah dijangkau bagi pengguna, terutama bagi pengguna yang berada di daerah perkotaan dengan tingkat kemacetan tinggi. Selain itu, dalam situasi darurat, seperti kendaraan mogok di tengah jalan, sangat sulit bagi pengguna untuk segera mendapatkan bantuan. 
+Melalui kehadiran startup inovatif kami yaitu "Si Montir", kami bertekad untuk mengatasi tantangan ini dengan menyediakan solusi yang inovatif dan andal bagi pemilik kendaraan di Indonesia. "Si Montir" merupakan sebuah platform online yang menyediakan layanan servis kendaraan yang dapat diakses dengan mudah dan cepat. Pengguna dapat dengan mudah memanggil montir melalui aplikasi tanpa harus datang ke bengkel. Montir dapat segera datang ke lokasi pengguna, mengurangi waktu tunggu dan memberikan kemudahan akses. Pengguna juga dapat membeli suku cadang yang dibutuhkan serta memilih layanan perbaikan melalui aplikasi, memberikan transparansi harga dan ketersediaan barang. Informasi real-time yang disediakan oleh aplikasi memungkinkan pengguna untuk memantau status perbaikan kendaraan mereka, meningkatkan transparansi dan kepercayaan pengguna terhadap layanan yang diberikan. Selain itu, aplikasi menyediakan layanan darurat yang dapat diakses kapan saja dan di mana saja, memberikan rasa aman bagi pengguna yang mungkin mengalami kerusakan kendaraan di waktu yang tidak terduga.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
