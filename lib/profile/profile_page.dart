@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
             gradient: LinearGradient(
               colors: [
                 Colors.blue.withOpacity(0.6),
-                Color.fromARGB(0, 0, 0, 0)
+                Color.fromARGB(0, 255, 255, 255)
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,

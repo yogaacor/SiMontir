@@ -20,7 +20,7 @@ class PromoPage extends StatelessWidget {
             gradient: LinearGradient(
               colors: [
                 Colors.blue.withOpacity(0.6),
-                Color.fromARGB(0, 0, 0, 0)
+                Color.fromARGB(0, 255, 255, 255)
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -210,13 +210,17 @@ class PromoStoresGrid extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 3 / 2,
+        childAspectRatio: 3 / 4, // Adjust the aspect ratio as needed
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
       ),
       itemCount: 6,
       itemBuilder: (context, index) {
-        return PromoStoreCard();
+        return Padding(
+          padding:
+              EdgeInsets.all(8.0), // Add padding around each PromoStoreCard
+          child: PromoStoreCard(),
+        );
       },
     );
   }
@@ -226,53 +230,50 @@ class PromoStoreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-                image: DecorationImage(
-                  image: NetworkImage('https://via.placeholder.com/150'),
+      color: Colors.white, // Set the background color of the Card
+      child: Container(
+        padding: EdgeInsets.all(12), // Adjust padding as needed
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AspectRatio(
+              aspectRatio: 16 / 9, // Adjust aspect ratio as needed
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  'https://via.placeholder.com/300x150', // Adjust image size and URL
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            SizedBox(height: 12), // Adjust spacing between image and text
+            Text(
+              'Bengkel 123, Gunung Pati',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 4),
+            Row(
               children: [
-                Text(
-                  'bengkel 123, patemon, Gunung Pati',
-                  style: TextStyle(fontSize: 12),
-                ),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    Icon(Icons.location_on, size: 12, color: Colors.grey),
-                    SizedBox(width: 4),
-                    Text('3.9 km', style: TextStyle(fontSize: 12)),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.star, size: 12, color: Colors.amber),
-                    Icon(Icons.star, size: 12, color: Colors.amber),
-                    Icon(Icons.star, size: 12, color: Colors.amber),
-                    Icon(Icons.star, size: 12, color: Colors.amber),
-                    Icon(Icons.star_half, size: 12, color: Colors.amber),
-                  ],
-                ),
+                Icon(Icons.location_on, size: 14, color: Colors.grey),
+                SizedBox(width: 4),
+                Text('3.9 km', style: TextStyle(fontSize: 12)),
               ],
             ),
-          ),
-        ],
+            Row(
+              children: [
+                Icon(Icons.star, size: 14, color: Colors.amber),
+                Icon(Icons.star, size: 14, color: Colors.amber),
+                Icon(Icons.star, size: 14, color: Colors.amber),
+                Icon(Icons.star, size: 14, color: Colors.amber),
+                Icon(Icons.star_half, size: 14, color: Colors.amber),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
