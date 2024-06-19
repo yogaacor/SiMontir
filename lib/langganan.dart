@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'pesanmontir.dart';
 import 'detaillangganan.dart';
 
-class LanggananPage extends StatelessWidget {
+class LanggananPage extends StatefulWidget {
+  @override
+  _LanggananPageState createState() => _LanggananPageState();
+}
+
+class _LanggananPageState extends State<LanggananPage> {
+  bool _isSubscribed = false;
+
   void _onBottomNavTapped(int index, BuildContext context) {
     if (index == 0) {
       Navigator.push(
@@ -10,7 +17,12 @@ class LanggananPage extends StatelessWidget {
         MaterialPageRoute(builder: (context) => PesanMontirPage()),
       );
     }
-    
+  }
+
+  void _updateSubscriptionStatus(bool status) {
+    setState(() {
+      _isSubscribed = status;
+    });
   }
 
   @override
@@ -37,13 +49,13 @@ class LanggananPage extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pop(context); 
+                            Navigator.pop(context);
                           },
                           child: Container(
                             padding: EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
-                              color: Colors.grey.withOpacity(0.2), 
+                              color: Colors.grey.withOpacity(0.2),
                             ),
                             child: Center(
                               child: Text(
@@ -60,7 +72,7 @@ class LanggananPage extends StatelessWidget {
                           padding: EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
-                            color: Colors.blue.withOpacity(0.2), 
+                            color: Colors.blue.withOpacity(0.2),
                           ),
                           child: Center(
                             child: Text(
@@ -73,36 +85,68 @@ class LanggananPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 16),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Langganan Aktif',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Icon(Icons.info_outline, color: Colors.blue),
-                            SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                'Kamu belum berlangganan nih. Beli dulu yuk! Nanti paket langganan kamu akan muncul di sini.',
-                                style: TextStyle(color: Colors.blue),
+                  if (_isSubscribed)
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Langganan Aktif',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Icon(Icons.info_outline, color: Colors.blue),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'Selamat! Kamu sudah berlangganan.',
+                                  style: TextStyle(color: Colors.blue),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Langganan Aktif',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Icon(Icons.info_outline, color: Colors.blue),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'Kamu belum berlangganan nih. Beli dulu yuk! Nanti paket langganan kamu akan muncul di sini.',
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   SizedBox(height: 16),
                   Container(
                     alignment: Alignment.centerLeft,
@@ -116,7 +160,7 @@ class LanggananPage extends StatelessWidget {
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 3, 
+                    itemCount: 3,
                     itemBuilder: (context, index) {
                       return Card(
                         margin: EdgeInsets.symmetric(vertical: 8.0),
@@ -159,13 +203,17 @@ class LanggananPage extends StatelessWidget {
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(
+                                  onPressed: () async {
+                                    final result = await Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>DetailLanggananPage(),
+                                        builder: (context) => DetailLanggananPage(),
                                       ),
                                     );
+
+                                    if (result == true) {
+                                      _updateSubscriptionStatus(true);
+                                    }
                                   },
                                   child: Text('Lebih lanjut'),
                                 ),
@@ -219,7 +267,7 @@ class LanggananPage extends StatelessWidget {
             ],
             selectedItemColor: Color(0xFF56BEE1),
             unselectedItemColor: Colors.grey,
-            currentIndex: 1, 
+            currentIndex: 1,
             onTap: (index) => _onBottomNavTapped(index, context),
           ),
         ),

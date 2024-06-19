@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'pesanmontir.dart';
 import 'caralangganan.dart';
-import 'syaratlangganan.dart'; 
+import 'syaratlangganan.dart';
 import 'pembatalanlangganan.dart';
 import 'pembayaranlangganan.dart';
+import 'langganan.dart'; // Pastikan Anda mengimpor LanggananPage
 
-class DetailLanggananPage extends StatelessWidget {
+class DetailLanggananPage extends StatefulWidget {
+  @override
+  _DetailLanggananPageState createState() => _DetailLanggananPageState();
+}
+
+class _DetailLanggananPageState extends State<DetailLanggananPage> {
+  bool isPaymentMethodSelected = false;
+
   void _onBottomNavTapped(int index, BuildContext context) {
     if (index == 0) {
       Navigator.push(
@@ -15,11 +23,63 @@ class DetailLanggananPage extends StatelessWidget {
     }
   }
 
-  void _onMoreOptionsTapped(BuildContext context) {
-    Navigator.push(
+  void _onMoreOptionsTapped(BuildContext context) async {
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => PembayaranLanggananPage()),
     );
+
+    if (result == true) {
+      setState(() {
+        isPaymentMethodSelected = true;
+      });
+    }
+  }
+
+  void _onSubscribeTapped(BuildContext context) {
+    if (isPaymentMethodSelected) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Konfirmasi'),
+            content: Text('Apakah anda yakin ingin melakukan transaksi pembayaran langganan SiMontir?'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Tidak'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Iya'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Berhasil'),
+                        content: Text('Selamat!! Anda telah berhasil melakukan transaksi. Terimakasih telah menjadi bagian dari SiMontir'),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text('Tutup'),
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Close success dialog
+                              Navigator.of(context).pop(true); // Return to LanggananPage with success result
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -209,12 +269,19 @@ class DetailLanggananPage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.warning_amber_rounded, color: Colors.red),
+                        if (!isPaymentMethodSelected)
+                          Icon(Icons.warning_amber_rounded, color: Colors.red),
                         SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'Pilih metode pembayaran',
-                            style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
+                            isPaymentMethodSelected
+                                ? 'Metode pembayaran telah dipilih'
+                                : 'Pilih metode pembayaran',
+                            style: TextStyle(
+                              color: isPaymentMethodSelected ? Colors.black : Colors.red,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         IconButton(
@@ -227,7 +294,7 @@ class DetailLanggananPage extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
-                        color: Colors.grey[600],
+                        color: isPaymentMethodSelected ? Color(0xFF56BEE1) : Colors.grey[600],
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Row(
@@ -235,16 +302,27 @@ class DetailLanggananPage extends StatelessWidget {
                         children: [
                           Text(
                             'Langganan',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                'Rp5.900',
-                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-                              ),
-                              Icon(Icons.arrow_forward, color: Colors.white),
-                            ],
+                          InkWell(
+                            onTap: () => _onSubscribeTapped(context),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Rp5.900',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Icon(Icons.arrow_forward, color: Colors.white),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -306,3 +384,4 @@ class DetailLanggananPage extends StatelessWidget {
     );
   }
 }
+

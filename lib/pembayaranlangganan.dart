@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PembayaranLanggananPage extends StatelessWidget {
+  void _selectPaymentMethod(BuildContext context) {
+    Navigator.pop(context, true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,7 +13,7 @@ class PembayaranLanggananPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, false);
           },
         ),
       ),
@@ -18,10 +22,10 @@ class PembayaranLanggananPage extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              leading: Image.asset('images/linkaja.png', width: 40, height: 40), // Adjust the path as needed
+              leading: Image.asset('images/linkaja.png', width: 40, height: 40),
               title: Text('LinkAja'),
               trailing: TextButton(
-                onPressed: () {},
+                onPressed: () => _selectPaymentMethod(context),
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xFF56BEE1),
@@ -35,7 +39,7 @@ class PembayaranLanggananPage extends StatelessWidget {
               title: Text('Kartu Kredit atau debit'),
               subtitle: Text('Visa, MasterCard, AMEX, dan JCB'),
               trailing: TextButton(
-                onPressed: () {},
+                onPressed: () => _selectPaymentMethod(context),
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xFF56BEE1),
@@ -49,7 +53,7 @@ class PembayaranLanggananPage extends StatelessWidget {
               title: Text('Kartu Kredit atau debit'),
               subtitle: Text('Visa, MasterCard, AMEX, dan JCB'),
               trailing: TextButton(
-                onPressed: () {},
+                onPressed: () => _selectPaymentMethod(context),
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xFF56BEE1),
