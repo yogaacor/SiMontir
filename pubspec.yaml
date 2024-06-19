@@ -64,6 +64,7 @@ flutter:
     - images/mobil.png
     - images/motor.png
     - images/diskon.png
+    - images/linkaja.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -3,6 +3,7 @@ import 'pesanmontir.dart';
 import 'caralangganan.dart';
 import 'syaratlangganan.dart'; 
 import 'pembatalanlangganan.dart';
+import 'pembayaranlangganan.dart';
 
 class DetailLanggananPage extends StatelessWidget {
   void _onBottomNavTapped(int index, BuildContext context) {
@@ -12,6 +13,13 @@ class DetailLanggananPage extends StatelessWidget {
         MaterialPageRoute(builder: (context) => PesanMontirPage()),
       );
     }
+  }
+
+  void _onMoreOptionsTapped(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PembayaranLanggananPage()),
+    );
   }
 
   @override
@@ -209,7 +217,10 @@ class DetailLanggananPage extends StatelessWidget {
                             style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Icon(Icons.more_horiz, color: Colors.black),
+                        IconButton(
+                          icon: Icon(Icons.more_horiz, color: Colors.black),
+                          onPressed: () => _onMoreOptionsTapped(context),
+                        ),
                       ],
                     ),
                     SizedBox(height: 16),
