@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simontir/profile/edit_profile_page.dart';
+import 'package:simontir/profile/promo_page.dart';
 import 'order_history_page.dart'; // Make sure to import the OrderHistoryPage
 
 class ProfilePage extends StatefulWidget {
@@ -22,7 +23,10 @@ class _ProfilePageState extends State<ProfilePage> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blue.withOpacity(0.6), Colors.transparent],
+              colors: [
+                Colors.blue.withOpacity(0.6),
+                Color.fromARGB(0, 0, 0, 0)
+              ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -174,7 +178,12 @@ class _ProfilePageState extends State<ProfilePage> {
         ProfileMenuItem(
           icon: Icons.local_offer,
           text: 'Promo',
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PromoPage()),
+            );
+          },
         ),
         ProfileMenuItem(
           icon: Icons.payment,
