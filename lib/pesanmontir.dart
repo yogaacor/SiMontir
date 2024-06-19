@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'detailpesan.dart';
 import 'promo.dart';
+import 'hasiltanggal.dart';
 
 class PesanMontirPage extends StatefulWidget {
   @override
@@ -58,6 +59,10 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
         _endDate = picked.end;
         _weekends = _getWeekendsInRange(_startDate!, _endDate!);
       });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HasilTanggalPage(_startDate!, _endDate!, _weekends)),
+      );
     }
   }
 
@@ -157,27 +162,6 @@ class _PesanMontirPageState extends State<PesanMontirPage> {
                   ),
                 ),
               ),
-              if (_startDate != null && _endDate != null)
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hari Sabtu dan Minggu antara ${DateFormat('dd MMM yyyy').format(_startDate!)} dan ${DateFormat('dd MMM yyyy').format(_endDate!)}:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      ..._weekends.map((date) => Text(
-                        DateFormat('EEEE, dd MMM yyyy').format(date),
-                        style: TextStyle(fontSize: 16),
-                      )),
-                    ],
-                  ),
-                ),
             ],
           ),
           Positioned(
